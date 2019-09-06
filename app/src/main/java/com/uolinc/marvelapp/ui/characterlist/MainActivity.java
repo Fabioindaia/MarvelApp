@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.snackbar.Snackbar;
 import com.uolinc.marvelapp.R;
 import com.uolinc.marvelapp.model.Result;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(R.layout.activity_main);
         initialize();
 

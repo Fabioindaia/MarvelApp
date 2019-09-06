@@ -4,14 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.uolinc.marvelapp.R;
 import com.uolinc.marvelapp.model.Result;
 
@@ -60,7 +59,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     class ViewHolder extends CharacterViewHolder {
 
-        private ImageView imgCharacter;
+        private SimpleDraweeView imgCharacter;
         private TextView txtName;
         private TextView txtDescription;
 
@@ -80,10 +79,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             Result result = resultList.get(position);
             String urlImage = result.getThumbnail().getPath() + "." + result.getThumbnail().getExtension();
 
-            Picasso.get().
-                    load(urlImage)
-                    .into(imgCharacter);
-
+            imgCharacter.setImageURI(urlImage);
             txtName.setText(result.getName());
             txtDescription.setText(result.getDescription());
 

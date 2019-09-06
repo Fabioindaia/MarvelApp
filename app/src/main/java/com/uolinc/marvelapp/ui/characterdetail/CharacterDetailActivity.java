@@ -3,24 +3,25 @@ package com.uolinc.marvelapp.ui.characterdetail;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.squareup.picasso.Picasso;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.uolinc.marvelapp.R;
 
 public class CharacterDetailActivity extends AppCompatActivity implements CharacterDetailContrato.View {
 
-    private ImageView imgCharacter;
+    private SimpleDraweeView imgCharacter;
     private TextView txtName;
     private TextView txtDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(R.layout.activity_character_detail);
         initialize();
 
@@ -70,9 +71,7 @@ public class CharacterDetailActivity extends AppCompatActivity implements Charac
     private void uploadData(){
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Picasso.get().
-                    load(bundle.getString("urlImage"))
-                    .into(imgCharacter);
+            imgCharacter.setImageURI(bundle.getString("urlImage"));
             txtName.setText(bundle.getString("name"));
             txtDescription.setText(bundle.getString("description"));
         }
