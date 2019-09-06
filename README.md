@@ -8,7 +8,7 @@ Liguagem de programação: Java
 
 Descrição do projeto:
 Aplicativo para carregar a lista de personagens da API da Marvel.
-Utilizado a API Retrofit para chamada e o pacote Picasso para carregar as imagens, aplicado a arquitetura MVP e utilizado Material Design.
+Utilizado a API Retrofit para chamada e Fresco para carregar as imagens, aplicado a arquitetura MVP e utilizado Material Design.
 
 
 # Esse repositório contém as instruções para execução e testes do projeto:
