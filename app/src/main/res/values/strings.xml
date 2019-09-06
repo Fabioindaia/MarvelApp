@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Marvel App</string>
+    <string name="lbl_ordenar_por">Ordenar por:</string>
+    <string name="load_error">Erro ao carregar</string>
+    <string name="try_again">Tentar novamente</string>
+
+    <!--- Array -->
+    <string-array name="order_by">
+        <item>Nome</item>
+        <item>Data de modificação</item>
+    </string-array>
+</resources>
