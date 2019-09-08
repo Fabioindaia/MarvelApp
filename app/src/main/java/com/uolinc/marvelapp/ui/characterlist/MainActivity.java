@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
      * Referencia os objetos
      * Configura a toolbar
      * Instância a classe presenter
+     * Altera o título da toolbar
      * Chama método para setar os parâmetros da recyclerview
      * Chama método para setar os dados do spinner
      */
@@ -91,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
         progressBarList = findViewById(R.id.progressBarList);
         ButterKnife.bind(this);
         presenter = new MainPresenter(this);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.lista_personagem));
+        }
         setRecyclerViewCharacter();
         setSpinnerOrderBy();
     }
