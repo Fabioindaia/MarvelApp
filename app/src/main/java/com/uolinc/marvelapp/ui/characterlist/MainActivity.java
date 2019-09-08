@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
         presenter = new MainPresenter(this);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.lista_personagem));
+            getSupportActionBar().setTitle(getResources().getString(R.string.personagens));
         }
         setRecyclerViewCharacter();
         setSpinnerOrderBy();
