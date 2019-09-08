@@ -15,14 +15,13 @@ import com.uolinc.marvelapp.R;
 import com.uolinc.marvelapp.model.Result;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
 
-    private List<Result> resultList;
+    private ArrayList<Result> resultList;
     private Context context;
     private final int VIEW_TYPE_LOADING = 0;
 
