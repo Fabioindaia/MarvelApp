@@ -1,6 +1,7 @@
 package com.uolinc.marvelapp.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Data {
 
@@ -8,7 +9,7 @@ public class Data {
     private int limit;
     private int total;
     private int count;
-    private ArrayList<Result> results = new ArrayList<>();
+    private List<Result> results = new ArrayList<>();
 
     public int getOffset() {
         return offset;
@@ -42,11 +43,11 @@ public class Data {
         this.count = count;
     }
 
-    public ArrayList<Result> getResults() {
+    public List<Result> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<Result> results) {
+    public void setResults(List<Result> results) {
         this.results = results;
     }
 }

@@ -26,6 +26,7 @@ import com.uolinc.marvelapp.model.Result;
 import com.uolinc.marvelapp.ui.characterdetail.CharacterDetailActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -34,9 +35,9 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     private ConstraintLayout constraintLayout;
     private Spinner spinnerOrderBy;
     private RecyclerView recyclerViewCharacter;
-    private MainContrato.Presenter presenter;
-    private ArrayList<Result> resultArrayList = new ArrayList<>();
     private ProgressBar progressBarList;
+    private MainContrato.Presenter presenter;
+    private List<Result> resultList = new ArrayList<>();
     private CharacterAdapter characterAdapter;
     private LinearLayoutManager linearLayoutManager;
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
                 }else{
                     orderBy = "modified";
                 }
-                resultArrayList.clear();
+                resultList.clear();
                 progressBarList.setVisibility(View.VISIBLE);
                 presenter.getData(20, 0, orderBy);
             }
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewCharacter.setLayoutManager(linearLayoutManager);
         recyclerViewCharacter.setHasFixedSize(true);
-        characterAdapter = new CharacterAdapter(resultArrayList, this);
+        characterAdapter = new CharacterAdapter(resultList, this);
         recyclerViewCharacter.setAdapter(characterAdapter);
         recyclerViewCharacter.addOnScrollListener(recyclerViewOnScrollListener);
     }
@@ -127,12 +128,12 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     /**
      * Carrega a lista de personagens
      *
-     * @param _resultArrayList lista de personagem
+     * @param _resultList lista de personagem
      */
     @Override
-    public void loadCharacterList(ArrayList<Result> _resultArrayList) {
+    public void loadCharacterList(List<Result> _resultList) {
         runOnUiThread(() ->{
-            resultArrayList.addAll(_resultArrayList);
+            resultList.addAll(_resultList);
             characterAdapter.notifyDataSetChanged();
             progressBarList.setVisibility(View.GONE);
             isLoading = false;
@@ -163,9 +164,9 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     public void showError() {
         progressBarList.setVisibility(View.GONE);
         if (isLoading) {
-            resultArrayList.add(new Result());
-            int position = resultArrayList.size() - 1;
-            resultArrayList.remove(position);
+            resultList.add(new Result());
+            int position = resultList.size() - 1;
+            resultList.remove(position);
             characterAdapter.notifyItemRemoved(position);
 
             isLoading = false;
