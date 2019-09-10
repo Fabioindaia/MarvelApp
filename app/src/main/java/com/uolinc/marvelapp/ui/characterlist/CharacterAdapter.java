@@ -14,18 +14,18 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.uolinc.marvelapp.R;
 import com.uolinc.marvelapp.model.Result;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
 
-    private ArrayList<Result> resultList;
+    private List<Result> resultList;
     private Context context;
     private final int VIEW_TYPE_LOADING = 0;
 
-    CharacterAdapter(ArrayList<Result> resultList, Context context) {
+    CharacterAdapter(List<Result> resultList, Context context) {
         this.resultList = resultList;
         this.context = context;
     }
