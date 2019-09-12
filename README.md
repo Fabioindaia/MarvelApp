@@ -1,7 +1,6 @@
 # MarvelApp
 MarvelApp
 
-Teste para empresa: Uol
 Responsável: Fábio Flores
 Data criação: 06/09/19
 Liguagem de programação: Java
