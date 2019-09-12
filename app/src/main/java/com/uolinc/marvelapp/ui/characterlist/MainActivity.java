@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     private CharacterAdapter characterAdapter;
     private LinearLayoutManager linearLayoutManager;
 
-    private int limit = 20, totalLoad = 20, offset = 0, total;
-    private boolean isLoading = true, isLastPage = false;
     private String orderBy = "name";
 
     @Override
@@ -55,11 +53,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
         spinnerOrderBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    orderBy = "name";
-                }else{
-                    orderBy = "modified";
-                }
+                orderBy = presenter.setOrderby(position);
                 resultList.clear();
                 progressBarList.setVisibility(View.VISIBLE);
                 presenter.getData(20, 0, orderBy);
@@ -92,13 +86,14 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
         recyclerViewCharacter = findViewById(R.id.recyclerViewCharacter);
         progressBarList = findViewById(R.id.progressBarList);
         ButterKnife.bind(this);
-        presenter = new MainPresenter(this);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.personagens));
+            getSupportActionBar().setTitle(getResources().getString(R.string.character));
         }
-        setRecyclerViewCharacter();
         setSpinnerOrderBy();
+        setRecyclerViewCharacter();
+
+        presenter = new MainPresenter(this, characterAdapter);
     }
 
     /**
@@ -136,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
             resultList.addAll(_resultList);
             characterAdapter.notifyDataSetChanged();
             progressBarList.setVisibility(View.GONE);
-            isLoading = false;
         });
     }
 
@@ -161,21 +155,19 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
      * Mostra mensagem de erro para o usuário com possibilidade de tentar carregar a lista novamente
      */
     @Override
-    public void showError() {
+    public void showError(boolean isLoading, int limit, int offset) {
         progressBarList.setVisibility(View.GONE);
         if (isLoading) {
             resultList.add(new Result());
             int position = resultList.size() - 1;
             resultList.remove(position);
             characterAdapter.notifyItemRemoved(position);
-
-            isLoading = false;
         }
 
         Snackbar snackbar = Snackbar.make(constraintLayout, getString(R.string.load_error), Snackbar.LENGTH_LONG);
         snackbar.setAction(getString(R.string.try_again), (View v) -> {
             progressBarList.setVisibility(View.VISIBLE);
-            presenter.getData(limit, offset, "name");
+            presenter.getData(limit, offset, orderBy);
             snackbar.dismiss();
         });
 
@@ -190,15 +182,8 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     }
 
     /**
-     * Seta a quantidade total de personagens do webservice
-     *
-     * @param total quantidade total de personagens
+     * Controle do scroll do recyclerview
      */
-    @Override
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
     private RecyclerView.OnScrollListener recyclerViewOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -208,32 +193,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
         @Override
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-            int visibleItemCount = linearLayoutManager.getChildCount();
-            int totalItemCount = linearLayoutManager.getItemCount();
-            int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
-
-            if (!isLoading && !isLastPage) {
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0
-                        && totalItemCount >= limit) {
-                    loadMoreItems();
-                }
-            }
+            presenter.scrolledRecyclerViewCharacter(linearLayoutManager, orderBy);
         }
     };
-
-    /**
-     * Faz a chamada para carregar mais 20 personagens quando chegar ao final da lista
-     */
-    private void loadMoreItems() {
-        isLoading = true;
-        if (total - totalLoad >=20) {
-            totalLoad += 20;
-        }else{
-            totalLoad += (total - totalLoad);
-            isLastPage = true;
-        }
-        offset += 20;
-        presenter.getData(limit, offset, orderBy);
-    }
 }

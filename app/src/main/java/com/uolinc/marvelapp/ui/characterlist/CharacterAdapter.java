@@ -24,6 +24,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
     private List<Result> resultList;
     private Context context;
     private final int VIEW_TYPE_LOADING = 0;
+    private int totalRecord;
 
     CharacterAdapter(List<Result> resultList, Context context) {
         this.resultList = resultList;
@@ -48,12 +49,21 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
     @Override
     public int getItemViewType(int position) {
         int VIEW_TYPE_ITEM = 1;
-        return position == resultList.size() - 1 ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+        return position == resultList.size() - 1 && position < totalRecord - 1 ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
     @Override
     public int getItemCount() {
         return resultList.size();
+    }
+
+    /**
+     * Seta a quantidade total de registros da página
+     *
+     * @param totalRecord total de registros
+     */
+    void setTotalRecord(int totalRecord){
+        this.totalRecord = totalRecord;
     }
 
     class ViewHolder extends CharacterViewHolder {
