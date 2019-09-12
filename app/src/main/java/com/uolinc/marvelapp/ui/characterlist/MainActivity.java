@@ -156,29 +156,31 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
      */
     @Override
     public void showError(boolean isLoading, int limit, int offset) {
-        progressBarList.setVisibility(View.GONE);
-        if (isLoading) {
-            resultList.add(new Result());
-            int position = resultList.size() - 1;
-            resultList.remove(position);
-            characterAdapter.notifyItemRemoved(position);
-        }
+        runOnUiThread(() -> {
+            progressBarList.setVisibility(View.GONE);
+            if (isLoading) {
+                resultList.add(new Result());
+                int position = resultList.size() - 1;
+                resultList.remove(position);
+                characterAdapter.notifyItemRemoved(position);
+            }
 
-        Snackbar snackbar = Snackbar.make(constraintLayout, getString(R.string.load_error), Snackbar.LENGTH_LONG);
-        snackbar.setAction(getString(R.string.try_again), (View v) -> {
-            progressBarList.setVisibility(View.VISIBLE);
-            presenter.getData(limit, offset, orderBy);
-            snackbar.dismiss();
+            Snackbar snackbar = Snackbar.make(constraintLayout, getString(R.string.load_error), Snackbar.LENGTH_LONG);
+            snackbar.setAction(getString(R.string.try_again), (View v) -> {
+                progressBarList.setVisibility(View.VISIBLE);
+                presenter.getData(limit, offset, orderBy);
+                snackbar.dismiss();
+            });
+
+            View snackView = snackbar.getView();
+            snackView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            TextView snackTextView = snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+            snackTextView.setTextColor(ContextCompat.getColor(getApplicationContext(), android.R.color.black));
+            TextView snackActionView = snackView.findViewById(com.google.android.material.R.id.snackbar_action);
+            snackActionView.setTextColor(ContextCompat.getColor(getApplicationContext(), android.R.color.white));
+
+            snackbar.show();
         });
-
-        View snackView = snackbar.getView();
-        snackView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        TextView snackTextView = snackView.findViewById(com.google.android.material.R.id.snackbar_text);
-        snackTextView.setTextColor(ContextCompat.getColor(getApplicationContext(), android.R.color.black));
-        TextView snackActionView = snackView.findViewById(com.google.android.material.R.id.snackbar_action);
-        snackActionView.setTextColor(ContextCompat.getColor(getApplicationContext(), android.R.color.white));
-
-        snackbar.show();
     }
 
     /**
