@@ -10,11 +10,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainPresenter implements MainContrato.Presenter {
+public class MainPresenter extends RetrofitConfig implements MainContrato.Presenter {
 
     private MainContrato.View view;
     private CharacterAdapter characterAdapter;
-
     private int totalLoad = 20, offset = 0, totalRecord;
     private boolean isLoading = true, isLastPage = false;
 
@@ -48,7 +47,7 @@ public class MainPresenter implements MainContrato.Presenter {
     @Override
     public void getData(int limit, int offset, String orderBy) {
         String tS = Tools.getTs();
-        Call<ReturnData> call = new RetrofitConfig().apiCall().listCharacter(tS, Tools.getApiKey(), Tools.getHash(tS), limit, offset, orderBy);
+        Call<ReturnData> call = apiCall().listCharacter(tS, Tools.getApiKey(), Tools.getHash(tS), limit, offset, orderBy);
         //noinspection NullableProblems
         call.enqueue(new Callback<ReturnData>() {
             @Override
@@ -72,7 +71,6 @@ public class MainPresenter implements MainContrato.Presenter {
             }
         });
     }
-
 
     /**
      * Faz a chamada para carregar novos personagens quando atingir o final da lista

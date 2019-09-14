@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     private List<Result> resultList = new ArrayList<>();
     private CharacterAdapter characterAdapter;
     private LinearLayoutManager linearLayoutManager;
-
     private String orderBy = "name";
 
     @Override
