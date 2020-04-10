@@ -31,3 +31,6 @@ local.properties
 *.ipr
 *~
 *.swp
+
+# Keys
+app/src/main/java/com/uolinc/marvelapp/util/Keys.kt

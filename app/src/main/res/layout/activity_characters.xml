@@ -5,13 +5,14 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.uolinc.marvelapp.ui.characterlist.MainActivity">
+    tools:context="com.uolinc.marvelapp.ui.characterlist.CharactersActivity">
 
     <TextView
-        android:id="@+id/lblOrderBy"
+        android:id="@+id/txt_order_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/noto_sans"
         android:text="@string/lbl_orderby"
@@ -21,18 +22,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerOrderBy"
+        android:id="@+id/spn_order_by"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lblOrderBy"
+        android:layout_marginRight="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_order_by"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lblOrderBy"
-        app:layout_constraintTop_toTopOf="@+id/lblOrderBy" />
+        app:layout_constraintStart_toEndOf="@+id/txt_order_by"
+        app:layout_constraintTop_toTopOf="@+id/txt_order_by" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCharacter"
+        android:id="@+id/characters_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -40,20 +43,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblOrderBy">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/txt_order_by" />
 
     <ProgressBar
-        android:id="@+id/progressBarList"
+        android:id="@+id/pb_characters"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerViewCharacter"
-        app:layout_constraintStart_toStartOf="@+id/recyclerViewCharacter"
+        app:layout_constraintEnd_toEndOf="@+id/characters_list"
+        app:layout_constraintStart_toStartOf="@+id/characters_list"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

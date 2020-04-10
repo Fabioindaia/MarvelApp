@@ -8,45 +8,44 @@
     tools:context=".ui.characterdetail.CharacterDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbarLayout"
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapseLayout"
+            android:id="@+id/collapselayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleGravity="center|bottom"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline">
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/imgCharacter"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_character"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                app:layout_collapseMode="parallax"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin" />
 
             <TextView
-                android:id="@+id/txtName"
+                android:id="@+id/txt_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_collapseMode="pin"
                 android:layout_gravity="bottom"
-                android:textAlignment="center"
                 android:background="@color/colorPrimary"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -58,11 +57,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
-            android:id="@+id/txtDescription"
+            android:id="@+id/txt_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small" />
 
     </androidx.core.widget.NestedScrollView>
 

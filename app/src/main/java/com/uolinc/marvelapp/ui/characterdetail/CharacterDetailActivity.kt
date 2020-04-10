@@ -3,25 +3,23 @@ package com.uolinc.marvelapp.ui.characterdetail
 import android.os.Bundle
 import android.transition.Explode
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.view.SimpleDraweeView
+import com.squareup.picasso.Picasso
 import com.uolinc.marvelapp.R
+import com.uolinc.marvelapp.ui.characterlist.presentation.CharacterPresentation
 
-class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContrato.View {
+class CharacterDetailActivity : AppCompatActivity() {
 
-    private lateinit var imgCharacter: SimpleDraweeView
+    private lateinit var toolbar: Toolbar
+    private lateinit var imgCharacter: ImageView
     private lateinit var txtName: TextView
     private lateinit var txtDescription: TextView
-    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Fresco.initialize(this)
         setContentView(R.layout.activity_character_detail)
         initialize()
 
@@ -34,7 +32,6 @@ class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContrato.Vie
      * Volta para a tela anterior ao clicar no botão
      *
      * @param menuItem menu de itens
-     * @return verdadeiro
      */
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
@@ -46,19 +43,18 @@ class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContrato.Vie
     /**
      * Referencia os objetos
      * Configura a toolbar
+     * Chama método para carregar os dados do personagem
      */
-    override fun initialize() {
+    private fun initialize() {
         toolbar = findViewById(R.id.toolbar)
-        imgCharacter = findViewById(R.id.imgCharacter)
-        txtName = findViewById(R.id.txtName)
-        txtDescription = findViewById(R.id.txtDescription)
+        imgCharacter = findViewById(R.id.img_character)
+        txtName = findViewById(R.id.txt_name)
+        txtDescription = findViewById(R.id.txt_description)
 
         setSupportActionBar(toolbar)
-        with(supportActionBar!!) {
-            title = ""
-            setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.ic_back)
-        }
+        supportActionBar?.title = ""
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
 
         uploadData()
     }
@@ -67,11 +63,13 @@ class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContrato.Vie
      * Carrega os dados do personagem
      */
     private fun uploadData() {
-        val bundle = intent.extras
-        with(bundle!!) {
-            imgCharacter.setImageURI(getString("urlImage"))
-            txtName.text = getString("name")
-            txtDescription.text = getString("description")
+        val character = intent.getParcelableExtra<CharacterPresentation>("character")!!
+        with(character) {
+            Picasso.get()
+                    .load(imageUrl)
+                    .into(imgCharacter)
+            txtName.text = name
+            txtDescription.text = description
         }
     }
 }
