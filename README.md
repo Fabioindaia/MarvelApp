@@ -14,7 +14,7 @@ Arquitetura MVVM e utilizado Material Design.
 # Esse repositório contém as instruções para execução e testes do projeto:
 
 - Baixar o projeto utilizando este link (https://github.com/Fabioindaia/MarvelApp.git);
-- É necessário criar a Classe Keys como estática, e criar as váriaveis privateKey e apiKey contendo os valores do seu usário cadastrado na Marvel;
+- É necessário criar a Classe Keys como estática dentro do pacote util, e nessa classe deve criar as váriaveis privateKey e apiKey contendo os valores do seu usário cadastrado na Marvel;
 - Para simular o aplicativo é necessário executar em um dispositivo com versão mínima do Android igual ou superior a versão 16.
 
 ### # Observações gerais
