@@ -1,4 +1,4 @@
-package com.eokoe.smartfitcoach.purchase.units.paging
+package com.uolinc.marvelapp.ui.characterlist.paging
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource

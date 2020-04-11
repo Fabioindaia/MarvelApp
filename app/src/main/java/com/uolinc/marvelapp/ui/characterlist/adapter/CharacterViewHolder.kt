@@ -13,8 +13,8 @@ import com.uolinc.marvelapp.ui.characterlist.presentation.CharacterPresentation
 class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val imgCharacter: AppCompatImageView = itemView.findViewById(R.id.img_character)
-    private val txtName: TextView = itemView.findViewById(R.id.txt_name)
-    private val txtDescription: TextView = itemView.findViewById(R.id.txt_description)
+    private val txtName: TextView = itemView.findViewById(R.id.tv_name)
+    private val txtDescription: TextView = itemView.findViewById(R.id.tv_description)
 
     fun bindTo(row: CharacterPresentation?, action: (CharacterPresentation) -> Unit) {
         itemView.run {

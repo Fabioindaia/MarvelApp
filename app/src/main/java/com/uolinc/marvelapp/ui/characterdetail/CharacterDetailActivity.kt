@@ -48,8 +48,8 @@ class CharacterDetailActivity : AppCompatActivity() {
     private fun initialize() {
         toolbar = findViewById(R.id.toolbar)
         imgCharacter = findViewById(R.id.img_character)
-        txtName = findViewById(R.id.txt_name)
-        txtDescription = findViewById(R.id.txt_description)
+        txtName = findViewById(R.id.tv_name)
+        txtDescription = findViewById(R.id.tv_description)
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""

@@ -5,8 +5,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.eokoe.smartfitcoach.purchase.units.paging.BrandCharacterDataSource
-import com.eokoe.smartfitcoach.purchase.units.paging.BrandCharacterDataSourceFactory
+import com.uolinc.marvelapp.ui.characterlist.paging.BrandCharacterDataSource
+import com.uolinc.marvelapp.ui.characterlist.paging.BrandCharacterDataSourceFactory
 import com.uolinc.marvelapp.network.NetworkState
 import com.uolinc.marvelapp.network.RetrofitConfig
 import com.uolinc.marvelapp.ui.characterlist.presentation.CharacterPresentation

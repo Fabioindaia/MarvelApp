@@ -26,7 +26,7 @@ class CharactersActivity : AppCompatActivity() {
 
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var spinnerOrderBy: Spinner
-    private lateinit var characterList: RecyclerView
+    private lateinit var charactersList: RecyclerView
     private lateinit var progressBarList: ProgressBar
 
     private val viewModel: CharactersViewModel by lazy {
@@ -51,7 +51,7 @@ class CharactersActivity : AppCompatActivity() {
     private fun initialize() {
         constraintLayout = findViewById(R.id.constraintLayout)
         spinnerOrderBy = findViewById(R.id.spn_order_by)
-        characterList = findViewById(R.id.characters_list)
+        charactersList = findViewById(R.id.characters_list)
         progressBarList = findViewById(R.id.pb_characters)
         ButterKnife.bind(this)
 
@@ -72,7 +72,7 @@ class CharactersActivity : AppCompatActivity() {
             startActivity(intent, bundle)
         }
 
-        characterList.apply {
+        charactersList.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = charactersAdapter
