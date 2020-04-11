@@ -7,6 +7,8 @@ import com.uolinc.marvelapp.network.ApiCall
 import com.uolinc.marvelapp.network.NetworkState
 import com.uolinc.marvelapp.ui.characterlist.mapper.DataCharacterMapper
 import com.uolinc.marvelapp.ui.characterlist.presentation.CharacterPresentation
+import com.uolinc.marvelapp.util.Keys
+import com.uolinc.marvelapp.util.Tools
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -98,7 +100,8 @@ class BrandCharacterDataSource(
         if (initialParams != null) initialState.postValue(NetworkState.LOADING)
         networkState.postValue(NetworkState.LOADING)
 
-        val disposable = api.listCharacter(requestedPage * requestedLoadSize, orderBy)
+        val ts = Tools.ts
+        val disposable = api.listCharacter(ts, Keys.apiKey, Tools.getHash(ts), requestedPage * requestedLoadSize, orderBy)
                 .map {
                     DataCharacterMapper().fromResponse(it)
                 }

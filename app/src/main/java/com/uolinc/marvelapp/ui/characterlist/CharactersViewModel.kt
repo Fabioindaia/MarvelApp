@@ -61,11 +61,4 @@ class CharactersViewModel : ViewModel() {
     fun retry() {
         dataSourceFactory.dataSourceLiveData.value!!.retry()
     }
-
-    /**
-     * Invalida última chamada para iniciar uma nova
-     * */
-    fun refresh() {
-        dataSourceFactory.dataSourceLiveData.value!!.invalidate()
-    }
 }

@@ -1,8 +1,6 @@
 package com.uolinc.marvelapp.network
 
-import com.google.gson.Gson
-import com.uolinc.marvelapp.util.Keys
-import com.uolinc.marvelapp.util.Tools
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,27 +16,17 @@ class RetrofitConfig {
 
     init {
         val logging = HttpLoggingInterceptor()
-        val httpClient = OkHttpClient.Builder()
         logging.level = HttpLoggingInterceptor.Level.BODY
+
+        val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(logging)
-        httpClient.addInterceptor {
-            val original = it.request()
-            val originalHttpUrl = original.url
 
-            val ts = Tools.ts
-            val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("apikey", Keys.apiKey)
-                    .addQueryParameter("ts", ts)
-                    .addQueryParameter("hash", Tools.getHash(ts)!!)
-                    .build()
-
-            it.proceed(original.newBuilder().url(url).build())
-        }
+        val gson = GsonBuilder().setLenient().create()
 
         retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(Gson()))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient.build())
                 .build()
     }

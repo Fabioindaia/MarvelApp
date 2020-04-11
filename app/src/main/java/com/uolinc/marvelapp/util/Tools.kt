@@ -27,7 +27,7 @@ object Tools {
      * @param tS string de milisegundos
      * @return hash Md5
      */
-    fun getHash(tS: String): String? = md5(tS + privateKey + apiKey)
+    fun getHash(tS: String): String = md5(tS + privateKey + apiKey)
 
     /**
      * Gera hash Md5
@@ -35,7 +35,7 @@ object Tools {
      * @param s Dados para gerar hash Md5
      * @return hash Md5
      */
-    private fun md5(s: String): String? {
+    private fun md5(s: String): String {
         return try {
             val md = MessageDigest.getInstance("MD5")
             val messageDigest = md.digest(s.toByteArray())
@@ -43,7 +43,7 @@ object Tools {
             number.toString(16)
         } catch (e: NoSuchAlgorithmException) {
             Log.e("MD5", e.localizedMessage!!)
-            null
+            ""
         }
     }
 }

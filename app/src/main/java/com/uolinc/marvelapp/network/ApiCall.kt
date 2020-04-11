@@ -11,6 +11,9 @@ import retrofit2.http.Query
 interface ApiCall {
 
     @GET("characters")
-    fun listCharacter(@Query("offset") offset: Int = 0,
+    fun listCharacter(@Query("ts") timeStamp: String,
+                      @Query("apikey") apiKey: String,
+                      @Query("hash") hash: String,
+                      @Query("offset") offset: Int = 0,
                       @Query("orderBy") orderBy: String): Observable<DataResponse>
 }
