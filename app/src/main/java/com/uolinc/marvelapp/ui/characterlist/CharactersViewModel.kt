@@ -61,4 +61,12 @@ class CharactersViewModel : ViewModel() {
     fun retry() {
         dataSourceFactory.dataSourceLiveData.value!!.retry()
     }
+
+    /**
+     * Libera recursos e threads alocadas
+     * */
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
+    }
 }
